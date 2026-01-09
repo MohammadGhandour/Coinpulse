@@ -172,7 +172,7 @@
   }
 
   .skeleton {
-    @apply bg-dark-400/60;
+    @apply bg-dark-400/60 animate-pulse;
   }
 
   header {

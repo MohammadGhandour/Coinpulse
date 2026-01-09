@@ -3,8 +3,8 @@ import DataTable from "@/components/DataTable";
 export function CoinOverviewFallback({ isError = false }: { isError?: boolean }) {
   return (
     <div id="coin-overview-fallback">
-      <div className="header pt-2">
-        <div className="header-image bg-dark-400 animate-pulse" />
+      <div className="header pt-2 mt-5">
+        <div className="header-image skeleton" />
         <div className="info">
           {isError ? (
             <>
@@ -13,8 +13,8 @@ export function CoinOverviewFallback({ isError = false }: { isError?: boolean })
             </>
           ) : (
             <>
-              <div className="header-line-sm bg-dark-400 animate-pulse" />
-              <div className="header-line-lg bg-dark-400 animate-pulse" />
+              <div className="header-line-sm skeleton" />
+              <div className="header-line-lg skeleton" />
             </>
           )}
         </div>
@@ -34,8 +34,8 @@ const skeletonColumns = [
     cellClassName: "name-cell",
     cell: () => (
       <div className="name-link">
-        <div className="name-image bg-dark-400 animate-pulse" />
-        <div className="name-line bg-dark-400 animate-pulse" />
+        <div className="name-image skeleton" />
+        <div className="name-line skeleton" />
       </div>
     )
   },
@@ -44,8 +44,8 @@ const skeletonColumns = [
     cellClassName: "change-cell",
     cell: () => (
       <div className="price-change">
-        <div className="change-icon bg-dark-400 animate-pulse" />
-        <div className="change-line bg-dark-400 animate-pulse" />
+        <div className="change-icon skeleton" />
+        <div className="change-line skeleton" />
       </div>
     )
   },
@@ -53,7 +53,7 @@ const skeletonColumns = [
     header: "Price",
     cellClassName: "price-cell",
     cell: () => (
-      <div className="price-line bg-dark-400 animate-pulse" />
+      <div className="price-line skeleton" />
     )
   }
 ];
