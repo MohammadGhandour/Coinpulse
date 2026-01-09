@@ -4,7 +4,7 @@ import TrendingCoins from "@/components/home/TrendingCoins";
 import { CategoriesFallback, CoinOverviewFallback, TrendingCoinsFallback } from "@/components/home/fallback";
 import { Suspense } from "react";
 
-export default async function Home() {
+export default function Home() {
   return (
     <main className="main-container">
       <section className="home-grid">

@@ -1,3 +1,4 @@
+import { CoinsFallback } from "@/components/coins/CoinsFallback";
 import CoinsPagination from "@/components/CoinsPagination";
 import DataTable from "@/components/DataTable";
 import { fetcher } from "@/lib/coingecko.actions";
@@ -58,7 +59,7 @@ const columns: DataTableColumn<CoinMarketData>[] = [
 ];
 
 
-export default async function page({ searchParams }: NextPageProps) {
+export default async function Coins({ searchParams }: NextPageProps) {
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
   const per_page = 10;
@@ -98,6 +99,6 @@ export default async function page({ searchParams }: NextPageProps) {
     )
   } catch (error) {
     console.error("Failed to load all coins", error);
-    return <p className="text-gray-500 text-center">Failed to load all coins</p>
+    return <CoinsFallback isError={true} />
   }
 };
