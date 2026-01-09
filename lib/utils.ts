@@ -30,6 +30,54 @@ export function formatCurrency(
   });
 }
 
+export function formatCurrencyShrt(
+  value: number | null | undefined,
+  currency?: string,
+  showSymbol?: boolean,
+) {
+  if (value === null || value === undefined || isNaN(value)) {
+    return showSymbol !== false ? '$0' : '0';
+  }
+
+  const abs = Math.abs(value);
+  const sign = value < 0 ? '-' : '';
+  const currencySymbol = showSymbol !== false ? getCurrencySymbol(currency || 'USD') : '';
+
+  // if (abs >= 1e12) {
+  //   return `${sign}${currencySymbol}${(abs / 1e12).toFixed(1)}T`;
+  // } else if (abs >= 1e9) {
+  //   return `${sign}${currencySymbol}${(abs / 1e9).toFixed(1)}B`;
+  // } else if (abs >= 1e6) {
+  //   return `${sign}${currencySymbol}${(abs / 1e6).toFixed(1)}M`;
+  // } else if (abs >= 1e3) {
+  //   return `${sign}${currencySymbol}${(abs / 1e3).toFixed(1)}K`;
+  // } else {
+  //   return `${sign}${currencySymbol}${abs.toFixed(2)}`;
+  // }
+  if (abs >= 1e9) {
+    return `${sign}${currencySymbol}${Number((abs / 1e9).toFixed(1)).toLocaleString(undefined, { style: "decimal", minimumFractionDigits: 2 })}B`;
+  } else if (abs >= 1e6) {
+    return `${sign}${currencySymbol}${Number((abs / 1e6).toFixed(1)).toLocaleString(undefined, { style: "decimal", minimumFractionDigits: 2 })}M`;
+  } else {
+    return `${sign}${currencySymbol}${abs.toFixed(2)}`;
+  }
+}
+
+function getCurrencySymbol(currency: string): string {
+  const symbols: Record<string, string> = {
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    JPY: '¥',
+    CNY: '¥',
+    KRW: '₩',
+    INR: '₹',
+    BTC: '₿',
+    ETH: 'Ξ',
+  };
+  return symbols[currency.toUpperCase()] || '$';
+}
+
 export function formatPercentage(change: number | null | undefined): string {
   if (change === null || change === undefined || isNaN(change)) {
     return '0.0%';
