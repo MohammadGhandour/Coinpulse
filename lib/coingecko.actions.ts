@@ -47,13 +47,17 @@ export async function getPools(
     name: "",
     network: "",
   };
+  try {
+    if (network && contractAddress) {
+      const poolData = await fetcher<{ data: PoolData[] }>(
+        `/onchain/networks/${network}/tokens/${contractAddress}/pools`
+      );
 
-  if (network && contractAddress) {
-    const poolData = await fetcher<{ data: PoolData[] }>(
-      `/onchain/networks/${network}/tokens/${contractAddress}/pools`
-    );
-
-    return poolData.data?.[0] ?? fallback;
+      return poolData.data?.[0] ?? fallback;
+    }
+  } catch (error) {
+    console.error(error);
+    return fallback;
   }
 
   try {

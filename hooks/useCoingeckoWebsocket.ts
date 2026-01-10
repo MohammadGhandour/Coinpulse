@@ -80,7 +80,7 @@ export const useCoinGeckoWebSocket = ({
     ws.onclose = () => setIsWsReady(false);
 
     ws.onerror = (error) => {
-      console.error(error);
+      console.error("WebSocket error: ", error);
       setIsWsReady(false);
     };
 
@@ -129,7 +129,7 @@ export const useCoinGeckoWebSocket = ({
       subscribe('CGSimplePrice', { coin_id: [coinId], action: 'set_tokens' });
     });
 
-    const poolAddress = poolId.replace('_', ':') ?? '';
+    const poolAddress = poolId?.replace('_', ':') ?? '';
 
     if (poolAddress) {
       subscribe('OnchainTrade', {
